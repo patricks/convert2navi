@@ -1,0 +1,23 @@
+# Format: Navigon 7.x Style
+# Author: Patrick Steiner
+# Date: 23.11.2013
+#
+
+DESCRIPTION Navigon 7 Style
+EXTENSION csv
+
+#
+# FILE LAYOUT DEFINITIIONS:
+#
+FIELD_DELIMITER ,
+#FIELD_ENCLOSER DOUBLEQUOTE
+RECORD_DELIMITER NEWLINE
+BADCHARS ,"
+
+#
+# INDIVIDUAL DATA FIELDS, IN ORDER OF APPEARANCE:
+#
+
+IFIELD  LON_DECIMAL, "", "%f"    # Longitude
+IFIELD  LAT_DECIMAL, "", "%f"    # Latitude
+IFIELD  SHORTNAME, "", "%s"      # Name
