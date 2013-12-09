@@ -11,7 +11,7 @@
 #                                                                             #
 ###############################################################################
 
-#usage example:  convert2navi.sh -c 1234567 -t navigon
+#usage example:  convert2navi.sh -q 1234567 -t navigon
 
 #navigon settings
 NAVIGONSTYLE="navigon.style"
@@ -107,16 +107,16 @@ function remove_myfinds()
 {
   echo "Removing my finds..."
   
-  gpsbabel -i gpx -f $AJCITO.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJCITO}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJEARTH.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJEARTH}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJEVENT.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJEVENT}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJLETTER.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJLETTER}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJMULTI.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJMULTI}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJTRADI.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJTRADI}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJUNKNOWN.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJUNKNOWN}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJVIRTUAL.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJVIRTUAL}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJWEBCAM.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJWEBCAM}_${PQNUMBER}.gpx
-  gpsbabel -i gpx -f $AJWHERIGO.gpx -f $PQNUMBER.gpx -x duplicate,location,shortname -o gpx -F ${AJWHERIGO}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJCITO.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJCITO}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJEARTH.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJEARTH}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJEVENT.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJEVENT}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJLETTER.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJLETTER}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJMULTI.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJMULTI}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJTRADI.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJTRADI}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJUNKNOWN.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJUNKNOWN}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJVIRTUAL.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJVIRTUAL}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJWEBCAM.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJWEBCAM}_${PQNUMBER}.gpx
+  gpsbabel -i gpx -f $AJWHERIGO.gpx -f $PQNUMBER.gpx -f $PQNUMBER.gpx -x duplicate,location,all -o gpx -F ${AJWHERIGO}_${PQNUMBER}.gpx
 }
 
 function create_navigonfile()
@@ -133,6 +133,10 @@ function create_navigonfile()
   gpsbabel -i gpx -f ${AJVIRTUAL}_${PQNUMBER}.gpx -o csv,style=navigon.style -F $AJVIRTUAL.csv
   gpsbabel -i gpx -f ${AJWEBCAM}_${PQNUMBER}.gpx -o csv,style=navigon.style -F $AJWEBCAM.csv
   gpsbabel -i gpx -f ${AJWHERIGO}_${PQNUMBER}.gpx -o csv,style=navigon.style -F $AJWHERIGO.csv
+
+  rm -rf *.gpx
+  rm -rf *.ov2
+  rm -f README.txt
   
   echo "Done. Now copy the .cvs files and the bmp files to the Navigon device"
 }
@@ -151,6 +155,9 @@ function create_tomtomfile()
   gpsbabel -i gpx -f ${AJVIRTUAL}_${PQNUMBER}.gpx -o tomtom -F $AJVIRTUAL.ov2
   gpsbabel -i gpx -f ${AJWEBCAM}_${PQNUMBER}.gpx -o tomtom -F $AJWEBCAM.ov2
   gpsbabel -i gpx -f ${AJWHERIGO}_${PQNUMBER}.gpx -o tomtom -F $AJWHERIGO.ov2
+
+  rm -rf *.gpx
+  rm -f README.txt
   
   echo "Done. Now copy the .ov2 files and the bmp files to the TomTom device"
 }
